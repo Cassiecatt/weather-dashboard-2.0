@@ -51,11 +51,30 @@ var getWeather = function () {
         cityInfo.appendChild(windSpeed);
 
         //UV variable
+        uvIndex(data.coord.lat, data.coord.lon);
 
     });
 };
 
-
+// uvIndex function
+var uvIndex = function (lat, lon) {
+    var apiUrl =
+      "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=a2c9a8e2a17021895f105341626feb6f&lat=" +
+      lat +
+      "&lon=" +
+      lon;
+    fetch(apiUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        // console.log(response[0].value)
+        var cityInfo = document.querySelector("#city-info");
+        var uv = document.createElement("p");
+        uv.textContent = "UV Index: " + data[0].value;
+        cityInfo.appendChild(uv);
+      });
+  };
 
 
 
