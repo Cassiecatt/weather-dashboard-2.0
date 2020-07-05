@@ -53,6 +53,9 @@ var getWeather = function () {
         //UV variable
         uvIndex(data.coord.lat, data.coord.lon);
 
+        //Call forecast function
+        forecast();
+
     });
 };
 
@@ -68,13 +71,94 @@ var uvIndex = function (lat, lon) {
         return response.json();
       })
       .then(function (data) {
-        // console.log(response[0].value)
+        // console.log(data[0].value)
         var cityInfo = document.querySelector("#city-info");
         var uv = document.createElement("p");
         uv.textContent = "UV Index: " + data[0].value;
         cityInfo.appendChild(uv);
       });
   };
+
+  // Forecast function
+var forecast = function() {
+    var userSearch = document.querySelector("#search-term").value;
+    var apiUrl =
+    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    userSearch +
+    "&units=imperial&appid=a2c9a8e2a17021895f105341626feb6f&lat";
+  fetch(apiUrl)
+  .then(function (response) {
+      return response.json();
+  })
+  .then(function (data) {
+    console.log("forecast", data);
+
+    //Create another div holding 5 day forecast information
+    var forecastContainer = document.createElement("div");
+    forecastContainer.classList.add("card", "mt-3");
+    forecastContainer.setAttribute("id", "forecast-container");
+    weatherContainer.appendChild(forecastContainer);
+
+    //Clear old content from city-info div
+    var forecastContainer = document.querySelector("#forecast-container");
+    forecastContainer.textContent = " ";
+
+    //Create header 
+    var forecastHeader = document.createElement("h3");
+    forecastHeader.textContent = "5-Day Forecast:";
+    forecastContainer.appendChild(forecastHeader);
+
+    //Create forecast container
+    var forecast = document.createElement("div");
+    forecast.classList.add("container");
+    forecast.setAttribute("id", "forecast");
+    forecastContainer.appendChild(forecast);
+
+    //Create div with a row class
+    var fiveDayForecast = document.createElement("div");
+    fiveDayForecast.classList.add("row");
+    fiveDayForecast.setAttribute("id", "display-forecast");
+    forecast.appendChild(fiveDayForecast);
+
+    //Only look at forecast for 3:00:00 on each day
+    for (var i = 2; i < data.list.length; i += 8 ) {
+        if (data.list[i].dt_txt.indexOf("6:00:00") != -1) {
+            //create div inside forecast to append variables to
+            var weatherCard = document.createElement("div");
+            weatherCard.classList.add("card", "col-md-2", "bg-primary", "text-white");
+            fiveDayForecast.appendChild(weatherCard);
+
+            //date variable
+            var dateEl = document.createElement("h6");
+            dateEl.classList.add("font-weight-bold");
+            dateEl.textContent = new Date(
+            data.list[i].dt_txt).toLocaleDateString();
+            weatherCard.appendChild(dateEl);
+
+            //temperature variable
+            var temp = document.createElement("p");
+            temp.classList.add("card-text");
+            temp.textContent = "Temp: " + data.list[i].main.temp_max + "°F";
+            weatherCard.appendChild(temp);
+
+
+            //humidity variable
+            var humidity = document.createElement("p");
+            humidity.classList.add("card-text");
+            humidity.textContent = "Humidity: " + data.list[i].main.humidity + "%";
+            weatherCard.appendChild(humidity);
+
+        }
+    }
+
+
+
+
+
+
+  })
+}
+
 
 
 
