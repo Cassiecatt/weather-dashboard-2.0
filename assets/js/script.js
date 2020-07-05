@@ -6,12 +6,12 @@ var weatherContainer = document.querySelector("#weather-container");
 //Make a fetch request to current weather API
 
 var getWeather = function () {
-    var userSearch = document.querySelector("#search-term").value;
+    var userSearch = document.querySelector("#search-term");
     var apiUrl =
       "http://api.openweathermap.org/data/2.5/weather?q=" +
-      userSearch +
+      userSearch.value +
       "&units=imperial&APPID=a2c9a8e2a17021895f105341626feb6f";
-  
+
     fetch(apiUrl)
       .then(function (response) {
         return response.json();
@@ -57,7 +57,7 @@ var getWeather = function () {
 
         //Call forecast function
         forecast();
-
+        userSearch.value = ""
     });
 };
 
@@ -76,7 +76,21 @@ var uvIndex = function (lat, lon) {
         // console.log(data[0].value)
         var cityInfo = document.querySelector("#city-info");
         var uv = document.createElement("p");
-        uv.textContent = "UV Index: " + data[0].value;
+        uv.textContent = "UV Index: " 
+        //creating buttonEl to change color of uv value
+        var buttonEl = document.createElement("span");
+        buttonEl.classList.add("btn", "btn-sm");
+        buttonEl.innerHTML = data[0].value;
+
+       if (data[0].value < 3) {
+            buttonEl.classList.add("btn-success");
+       }
+       else if (data[0].value < 7) {
+            buttonEl.classList.add("btn-warning");
+       } else {
+           buttonEl.classList.add("btn-danger");
+       }
+        uv.appendChild(buttonEl)
         cityInfo.appendChild(uv);
       });
   };
@@ -94,6 +108,7 @@ var forecast = function() {
   })
   .then(function (data) {
     console.log("forecast", data);
+ 
 
     //Create another div holding 5 day forecast information
     var forecastContainer = document.createElement("div");
@@ -127,6 +142,7 @@ var forecast = function() {
     //Only look at forecast for 3:00:00 on each day
     for (var i = 2; i < data.list.length; i += 8 ) {
         if (data.list[i].dt_txt.indexOf("6:00:00") != -1) {
+
             //create div inside forecast to append variables to
             var weatherCard = document.createElement("div");
             weatherCard.classList.add("card", "col-md-2", "bg-primary", "text-white");
