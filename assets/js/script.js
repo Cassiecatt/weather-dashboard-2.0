@@ -19,10 +19,12 @@ var getWeather = function () {
       .then(function (data) {
         console.log("getWeather", data)
 
+
         //Create div with a class of card / ID of city-info
         var cityInfo = document.createElement("div");
         cityInfo.classList.add("card");
         cityInfo.setAttribute("id", "city-info");
+        // cityInfo.textContent = " ";
         weatherContainer.appendChild(cityInfo);
 
         //Clear old content from city-info div
@@ -95,17 +97,18 @@ var forecast = function() {
 
     //Create another div holding 5 day forecast information
     var forecastContainer = document.createElement("div");
-    forecastContainer.classList.add("card", "mt-3");
+    forecastContainer.classList.add("card", "mt-3", "p-2");
     forecastContainer.setAttribute("id", "forecast-container");
+    // forecastContainer.textContent = " ";
     weatherContainer.appendChild(forecastContainer);
 
-    //Clear old content from city-info div
+    //Clear old content from forecast div
     var forecastContainer = document.querySelector("#forecast-container");
     forecastContainer.textContent = " ";
 
     //Create header 
     var forecastHeader = document.createElement("h3");
-    forecastHeader.textContent = "5-Day Forecast:";
+    forecastHeader.textContent = " 5-Day Forecast:";
     forecastContainer.appendChild(forecastHeader);
 
     //Create forecast container
@@ -119,6 +122,7 @@ var forecast = function() {
     fiveDayForecast.classList.add("row");
     fiveDayForecast.setAttribute("id", "display-forecast");
     forecast.appendChild(fiveDayForecast);
+
 
     //Only look at forecast for 3:00:00 on each day
     for (var i = 2; i < data.list.length; i += 8 ) {
@@ -135,6 +139,12 @@ var forecast = function() {
             data.list[i].dt_txt).toLocaleDateString();
             weatherCard.appendChild(dateEl);
 
+            //icon variable
+            var iconImg = document.createElement("img");
+            iconImg.classList.add("card-img");
+            iconImg.src = "http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png";
+            weatherCard.appendChild(iconImg);
+
             //temperature variable
             var temp = document.createElement("p");
             temp.classList.add("card-text");
@@ -150,11 +160,6 @@ var forecast = function() {
 
         }
     }
-
-
-
-
-
 
   })
 }

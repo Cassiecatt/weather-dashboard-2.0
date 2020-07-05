@@ -6,3 +6,8 @@
     justify-content: space-evenly;
     /*padding: 10px;*/
 }
+
+#city-info {
+    padding: 10px;
+    font-size: 14px;
+}
