@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css"/> <!--Icon CDN Link-->
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="text-center p-3 mb-2 bg-dark text-white">
+        <h1>
+          Weather Dashboard
+        </h1>
+      </header>
+      <!-- Header End -->
+      <!-- Bootstrap Columns -->
+        <!-- Search Box Container-->
+        <div class="container">
+            <div class="row">
+              <!--Search Box-->
+              <div class="col-12 col-md-6 bg-light" id="search-bar-container">
+                <h4>Search for a City:</h4>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="search-term" />
+                  <div class="search-button">
+                    <button class="btn btn-outline-secondary bg-primary text-white" type="button" id="search-button">
+                      <span class="oi oi-magnifying-glass"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Search Box End-->
+              <!-- Cards to append API data to-->
+              <div class="col-12 col-md-6" id="weather-container">
+           
+            </div>
+          </div>
+
+
+
+
+
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
