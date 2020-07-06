@@ -192,25 +192,12 @@ var forecast = function () {
 //Function grabbing user search in input field
 var searchValue = function () {
   getWeather();
-  // searchHistory();
   var userSearch = document.querySelector("#search-term").value;
+  localStorage.setItem("city", userSearch);
 };
 
-// var searchHistoy = function () {
-//   var liEl = document.createElement("li")
-//   liEl.classList.add("list-group-item", "list-group-item-action");
-//   var text = userSearch
-//   liEl.textContent = text;
-//   var historyEl = document.querySelector('#search-history');
-//   console.log(event.target)
-//   historyEl.onclick = function(){
-//     console.log(event.target.tagName)
-//     if (event.target.tagName == "LI"){
-//     getWeather(event.target.textContent)
-//     }
-//   }
-//   historyEl.appendChild(liEl);
-// };
+//searchHistory function
+
 
 // Event Listener - when button is clicked getWeather function runs
 searchButton.addEventListener("click", searchValue);
