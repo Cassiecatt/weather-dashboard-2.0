@@ -8,7 +8,7 @@ var weatherContainer = document.querySelector("#weather-container");
 var getWeather = function () {
   var userSearch = document.querySelector("#search-term").value;
   var apiUrl =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     userSearch +
     "&units=imperial&APPID=a2c9a8e2a17021895f105341626feb6f";
 
@@ -65,7 +65,7 @@ var getWeather = function () {
 // uvIndex function
 var uvIndex = function (lat, lon) {
   var apiUrl =
-    "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=a2c9a8e2a17021895f105341626feb6f&lat=" +
+    "https://api.openweathermap.org/data/2.5/uvi/forecast?appid=a2c9a8e2a17021895f105341626feb6f&lat=" +
     lat +
     "&lon=" +
     lon;
@@ -99,7 +99,7 @@ var uvIndex = function (lat, lon) {
 var forecast = function () {
   var userSearch = document.querySelector("#search-term").value;
   var apiUrl =
-    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
     userSearch +
     "&units=imperial&appid=a2c9a8e2a17021895f105341626feb6f&lat";
   fetch(apiUrl)
@@ -167,7 +167,7 @@ var forecast = function () {
           var iconImg = document.createElement("img");
           iconImg.classList.add("card-img");
           iconImg.src =
-            "http://openweathermap.org/img/wn/" +
+            "https://openweathermap.org/img/wn/" +
             data.list[i].weather[0].icon +
             "@2x.png";
           weatherCard.appendChild(iconImg);
@@ -192,8 +192,25 @@ var forecast = function () {
 //Function grabbing user search in input field
 var searchValue = function () {
   getWeather();
+  // searchHistory();
   var userSearch = document.querySelector("#search-term").value;
 };
+
+// var searchHistoy = function () {
+//   var liEl = document.createElement("li")
+//   liEl.classList.add("list-group-item", "list-group-item-action");
+//   var text = userSearch
+//   liEl.textContent = text;
+//   var historyEl = document.querySelector('#search-history');
+//   console.log(event.target)
+//   historyEl.onclick = function(){
+//     console.log(event.target.tagName)
+//     if (event.target.tagName == "LI"){
+//     getWeather(event.target.textContent)
+//     }
+//   }
+//   historyEl.appendChild(liEl);
+// };
 
 // Event Listener - when button is clicked getWeather function runs
 searchButton.addEventListener("click", searchValue);
