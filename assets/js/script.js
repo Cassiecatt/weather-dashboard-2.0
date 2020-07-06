@@ -6,10 +6,10 @@ var weatherContainer = document.querySelector("#weather-container");
 //Make a fetch request to current weather API
 
 var getWeather = function () {
-    var userSearch = document.querySelector("#search-term").value;
+    var userSearch = document.querySelector("#search-term");
     var apiUrl =
       "http://api.openweathermap.org/data/2.5/weather?q=" +
-      userSearch +
+      userSearch.value +
       "&units=imperial&APPID=a2c9a8e2a17021895f105341626feb6f";
 
     fetch(apiUrl)
@@ -57,6 +57,7 @@ var getWeather = function () {
 
         //Call forecast function
         forecast();
+        userSearch.value = ""
     });
 };
 
@@ -96,7 +97,6 @@ var uvIndex = function (lat, lon) {
 
   // Forecast function
 var forecast = function() {
-
     var userSearch = document.querySelector("#search-term").value;
     var apiUrl =
     "http://api.openweathermap.org/data/2.5/forecast?q=" +
