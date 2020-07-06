@@ -149,7 +149,7 @@ var forecast = function () {
           weatherCard.classList.add(
             "card",
             "col-md-2",
-            "col-sm-4",
+            "col-sm-6",
             "bg-primary",
             "text-white"
           );
