@@ -39,7 +39,7 @@ var getWeather = function () {
 
          //Temperature variable
         var temperature = document.createElement("p");
-        temperature.textContent = "Temperature: " + data.main.temp + "°F"; // need to convert to °F
+        temperature.textContent = "Temperature: " + data.main.temp + "°F"; 
         cityInfo.appendChild(temperature);
 
         //Humidity variable
@@ -76,7 +76,21 @@ var uvIndex = function (lat, lon) {
         // console.log(data[0].value)
         var cityInfo = document.querySelector("#city-info");
         var uv = document.createElement("p");
-        uv.textContent = "UV Index: " + data[0].value;
+        uv.textContent = "UV Index: " 
+        //creating buttonEl to change color of uv value
+        var buttonEl = document.createElement("span");
+        buttonEl.classList.add("btn", "btn-sm");
+        buttonEl.innerHTML = data[0].value;
+
+       if (data[0].value < 3) {
+            buttonEl.classList.add("btn-success");
+       }
+       else if (data[0].value < 7) {
+            buttonEl.classList.add("btn-warning");
+       } else {
+           buttonEl.classList.add("btn-danger");
+       }
+        uv.appendChild(buttonEl)
         cityInfo.appendChild(uv);
       });
   };
@@ -124,9 +138,9 @@ var forecast = function() {
     forecast.appendChild(fiveDayForecast);
 
 
-    //Only look at forecast for 3:00:00 on each day
+    //Only look at forecast for 6:00:00 on each day
     for (var i = 2; i < data.list.length; i += 8 ) {
-        if (data.list[i].dt_txt.indexOf("6:00:00") != -1) {
+        if (data.list[i].dt_txt.indexOf("2, 10, 18, 26, 34")) { //if i chose to do ("6:00:00") for example, the forecast would disappear after the time has passed. 
             //create div inside forecast to append variables to
             var weatherCard = document.createElement("div");
             weatherCard.classList.add("card", "col-md-2", "bg-primary", "text-white");
