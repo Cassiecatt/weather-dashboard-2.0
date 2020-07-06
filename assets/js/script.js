@@ -142,7 +142,7 @@ var forecast = function () {
 
       //Only look at forecast for 12:00:00 on each day
       for (var i = 2; i < data.list.length; i += 8) {
-        if (data.list[i].dt_txt.indexOf("12:00:00") != -1) {
+        if (data.list[i].dt_txt.indexOf("2,10,18,26,34")) {
           //if i chose to do ("12:00:00") for example, the forecast would disappear after the time has passed.
           //create div inside forecast to append variables to
           var weatherCard = document.createElement("div");
